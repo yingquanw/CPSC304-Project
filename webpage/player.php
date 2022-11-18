@@ -1,16 +1,33 @@
+<!--Test Oracle file for UBC CPSC304 2018 Winter Term 1
+  Created by Jiemin Zhang
+  Modified by Simona Radu
+  Modified by Jessica Wong (2018-06-22)
+  This file shows the very basics of how to execute PHP commands
+  on Oracle.
+  Specifically, it will drop a table, create a table, insert values
+  update values, and then query for values
+
+  IF YOU HAVE A TABLE CALLED "demoTable" IT WILL BE DESTROYED
+
+  The script assumes you already have a server set up
+  All OCI commands are commands to the Oracle libraries
+  To get the file to work, you must place it somewhere where your
+  Apache server can run it, and you must rename it to have a ".php"
+  extension.  You must also change the username and password on the
+  OCILogon below to be your ORACLE username and password -->
+
+
+
   <html>
     <head>
-        <title>Fan Registration</title>
+        <title>Search Player</title>
     </head>
 
     <body>
-
-        <h2>Fan Registration</h2>
-        <form method="POST" action="fan.php"> <!--refresh page when submitted-->
-            <input type="hidden" id="insertQueryRequest" name="insertQueryRequest">
-            Name: <input type="text" name="name"> <br /><br />
-            Email: <input type="text" name="email"> <br /><br />
-            Favorite Team: <select name="teamID">
+        <h2>Search Player</h2>
+        <form method="POST" action="player.php"> <!--refresh page when submitted-->
+            <input type="hidden" id="playerSearchRequest" name="playerSearchRequest">
+            Team Name: <select name="teamID">
                 <option value="">--Please choose a team--</option>
                 <option value="1">Boston Celtics</option>
                 <option value="2">Brooklyn Nets</option>
@@ -43,54 +60,8 @@
                 <option value="29">New Orleans Pelicans</option>
                 <option value="30">San Antonio Spurs</option>
                 </select>
-
-            <input type="submit" value="Insert" name="insertSubmit"></p>
+            <input type="submit" name="searchPlayer"></p>
         </form>
-
-        <hr />
-
-        <h2>Fan Information Update</h2>
-        <form method="POST" action="fan.php"> <!--refresh page when submitted-->
-            <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
-            Name: <input type="text" name="name"> <br /><br />
-            Email: <input type="text" name="email"> <br /><br />
-            Favorite Team: <select name="teamID">
-            <option value="">--Please choose a team--</option>
-                <option value="1">Boston Celtics</option>
-                <option value="2">Brooklyn Nets</option>
-                <option value="3">New York Knicks</option>
-                <option value="4">Philadelphia 76ers</option>
-                <option value="5">Toronto Raptors</option>
-                <option value="6">Chicago Bulls</option>
-                <option value="7">Cleveland Cavaliers</option>
-                <option value="8">Detroit Pistons</option>
-                <option value="9">Indiana Pacers</option>
-                <option value="10">Milwaukee Bucks</option>
-                <option value="11">Atlanta Hawks</option>
-                <option value="12">Charlotte Hornets</option>
-                <option value="13">Miami Heat</option>
-                <option value="14">Orlando Magic</option>
-                <option value="15">Washington Wizards</option>
-                <option value="16">Denver Nuggets</option>
-                <option value="17">Minnesota Timberwolves</option>
-                <option value="18">Oklahoma City Thunder</option>
-                <option value="19">Portland Trail Blazers</option>
-                <option value="20">Utah Jazz</option>
-                <option value="21">Golden State Warriors</option>
-                <option value="22">Los Angeles Clippers</option>
-                <option value="23">Los Angeles Lakers</option>
-                <option value="24">Phoenix Suns</option>
-                <option value="25">Sacramento Kings</option>
-                <option value="26">Dallas Mavericks</option>
-                <option value="27">Houston Rockets</option>
-                <option value="28">Memphis Grizzlies</option>
-                <option value="29">New Orleans Pelicans</option>
-                <option value="30">San Antonio Spurs</option>
-                </select>
-
-            <input type="submit" value="Update" name="updateSubmit"></p>
-        </form>
-
 
         <?php
 		//this tells the system that it's no longer just parsing html; it's now parsing PHP
@@ -127,13 +98,10 @@
                 $e = oci_error($statement); // For OCIExecute errors pass the statementhandle
                 echo htmlentities($e['message']);
                 $success = False;
-            } else {
-                echo "<br> Update successed!";
             }
 
 			return $statement;
 		}
-
 
         function executeBoundSQL($cmdstr, $list) {
             /* Sometimes the same statement will be executed several times with different values for the variables involved in the query.
@@ -166,19 +134,28 @@
                     echo htmlentities($e['message']);
                     echo "<br>";
                     $success = False;
-                } else {
-                    echo "<br> Registration successed!";
                 }
             }
         }
 
         function printResult($result) { //prints results from a select statement
-            echo "<br>Retrieved data from table demoTable:<br>";
-            echo "<table>";
-            echo "<tr><th>ID</th><th>Name</th></tr>";
+            // echo "<br>Retrieved data from table Player:<br>";
+            // echo "<table>";
+            // echo "<tr><th>ID</th><th>Name</th></tr>";
 
-            while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
-                echo "<tr><td>" . $row["ID"] . "</td><td>" . $row["NAME"] . "</td></tr>"; //or just use "echo $row[0]"
+            // while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
+            //     echo "<tr><td>" . $row["playerID"] . "</td><td>" . $row["playerName"] . "</td></tr>"; //or just use "echo $row[0]"
+            // }
+
+            // echo "</table>";
+            echo "<br>Retrieved data from table Player:<br>";
+            echo "<table>";
+            echo "<tr><th>Name</th><th>jerseyNum</th></tr>";
+
+            
+            while (($row = OCI_Fetch_Array($result, OCI_BOTH)) != false) {
+                echo "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td></tr>"; 
+                // echo "<br> The number of tuples in demoTable: " . $row[0] . "<br>";
             }
 
             echo "</table>";
@@ -209,55 +186,40 @@
             OCILogoff($db_conn);
         }
 
-
-        function handleInsertRequest() {
-            global $db_conn;
     
-            //Getting the values from user and insert data into the table
-            $tuple = array (
-                ":bind1" => rand(100, 999),
-                ":bind2" => $_POST['teamID'],
-                ":bind3" => $_POST['name'],
-                ":bind4" => $_POST['email']
-
-            );
-
-            $alltuples = array (
-                $tuple
-            );
-
-            executeBoundSQL("insert into Fan values (:bind1, :bind2, :bind3, :bind4)", $alltuples);
-            OCICommit($db_conn);
-        }
-
-        function handleUpdateRequest() {
+        function handlePlayerSearchRequest() {
             global $db_conn;
 
-            $name = $_POST['name'];
-            $email = $_POST['email'];
             $teamID = $_POST['teamID'];
 
-            // you need the wrap the old name and new name values with single quotations
-            executePlainSQL("UPDATE Fan SET email='" . $email . "', teamID = '" . $teamID . "' WHERE fanName='" . $name . "'");
-            OCICommit($db_conn);
+            $result = executePlainSQL("SELECT playerName, jerseyNum FROM Player WHERE teamID = $teamID");
+            // $result = executePlainSQL("SELECT Count(*) FROM Player WHERE teamID = $teamID");
+
+            // if (($result = oci_fetch_row($result)) != false) {
+            //     echo "<br> The number of tuples in demoTable: " . $result[0] . "<br>";
+            // }
+                // for ($x = 0; $x < sizeof($result); $x++) {
+                //     echo "$result[$x][0] <br>";
+                // }
+            printResult($result);
         }
 
+        // HANDLE ALL POST ROUTES
 	// A better coding practice is to have one method that reroutes your requests accordingly. It will make it easier to add/remove functionality.
-        function handlePOSTRequest() {
-            if (connectToDB()) {
-                if (array_key_exists('insertQueryRequest', $_POST)) {
-                    handleInsertRequest();
-                } else if (array_key_exists('updateQueryRequest', $_POST)) {
-                    handleUpdateRequest();
-                }
-                disconnectFromDB();
-            }
+    function handlePOSTRequest() {
+        if (connectToDB()) {
+            if (array_key_exists('playerSearchRequest', $_POST)) {
+                handlePlayerSearchRequest();
+            } 
+            disconnectFromDB();
         }
+    }
+        // HANDLE ALL GET ROUTES
+	// A better coding practice is to have one method that reroutes your requests accordingly. It will make it easier to add/remove functionality.
 
-
-		if (isset($_POST['insertSubmit'])||isset($_POST['updateSubmit'])) {
+        if (isset($_POST['searchPlayer'])) {
             handlePOSTRequest();
-        } 
+        }
 		?>
 	</body>
 </html>
