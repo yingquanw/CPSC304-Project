@@ -237,6 +237,7 @@ INSERT INTO Player VALUES(29, 29, 'Alvarado, Jose', DATE '1998-04-12', 15, 500, 
 INSERT INTO Player VALUES(30, 30, 'Bates-Diop, Keita', DATE '1996-01-23', 31, 300, 426, 489, 509, 542);
 INSERT INTO Player VALUES(31, 16, 'Jokić, Nikola', DATE '1995-02-19', 15, 1200, 648, 893, 902, 941);
 
+
 INSERT INTO AwardsAndHonors VALUES(31, 'MVP', '2020-2021');
 INSERT INTO AwardsAndHonors VALUES(1, 'Rookie of the Year', '2020-2021');
 INSERT INTO AwardsAndHonors VALUES(2, 'Most Improved', '2020-2021');
