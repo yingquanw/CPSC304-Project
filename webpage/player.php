@@ -23,6 +23,10 @@
         <title>Search Player</title>
     </head>
 
+    <form method="GET" action="main.php"> 
+            <input type="submit" name="mainPage" value="Back to main page"></p>
+    </form>
+
     <body>
         <h2>Search Player</h2>
         <form method="POST" action="player.php"> <!--refresh page when submitted-->
@@ -187,35 +191,25 @@
         }
 
     
-        function handlePlayerSearchRequest() {
+        function handleExpenseRequest() {
             global $db_conn;
 
             $teamID = $_POST['teamID'];
 
             $result = executePlainSQL("SELECT playerName, jerseyNum FROM Player WHERE teamID = $teamID");
-            // $result = executePlainSQL("SELECT Count(*) FROM Player WHERE teamID = $teamID");
 
-            // if (($result = oci_fetch_row($result)) != false) {
-            //     echo "<br> The number of tuples in demoTable: " . $result[0] . "<br>";
-            // }
-                // for ($x = 0; $x < sizeof($result); $x++) {
-                //     echo "$result[$x][0] <br>";
-                // }
             printResult($result);
         }
 
         // HANDLE ALL POST ROUTES
-	// A better coding practice is to have one method that reroutes your requests accordingly. It will make it easier to add/remove functionality.
     function handlePOSTRequest() {
         if (connectToDB()) {
             if (array_key_exists('playerSearchRequest', $_POST)) {
-                handlePlayerSearchRequest();
+                handleExpenseRequest();
             } 
             disconnectFromDB();
         }
     }
-        // HANDLE ALL GET ROUTES
-	// A better coding practice is to have one method that reroutes your requests accordingly. It will make it easier to add/remove functionality.
 
         if (isset($_POST['searchPlayer'])) {
             handlePOSTRequest();

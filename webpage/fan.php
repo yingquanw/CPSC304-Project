@@ -5,6 +5,10 @@
 
     <body>
 
+    <form method="GET" action="main.php"> 
+            <input type="submit" name="mainPage" value="Back to main page"></p>
+    </form>
+
         <h2>Fan Registration</h2>
         <form method="POST" action="fan.php"> <!--refresh page when submitted-->
             <input type="hidden" id="insertQueryRequest" name="insertQueryRequest">
