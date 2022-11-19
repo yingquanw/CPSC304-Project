@@ -23,6 +23,10 @@
         <title>Award And Honors</title>
     </head>
 
+    <form method="GET" action="main.php"> 
+            <input type="submit" name="mainPage" value="Back to main page"></p>
+    </form>
+
     <body>
         <h2>Awards and Honors</h2>
         <form method="POST" action="awardedPlayers.php"> <!--refresh page when submitted-->

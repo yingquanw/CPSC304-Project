@@ -25,6 +25,10 @@
    <!-- add Html link -->
 
     <body>
+        
+    <form method="GET" action="main.php"> 
+            <input type="submit" name="mainPage" value="Back to main page"></p>
+    </form>
 
         <h2>Current total expense on players for each team</h2>
         <form method="GET" action="expenseOnPlayer.php"> <!--refresh page when submitted-->
