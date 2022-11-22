@@ -33,5 +33,19 @@
             <input type="submit" name="expense" value="go"></p>
         </form>
 
+        <hr />
+
+        <h2>Highest Average Salary</h2>
+        <form method="GET" action="NEST_AG_GROUP.php"> 
+            <input type="submit" name="averageSalary" value="go"></p>
+        </form>
+
+        <hr />
+
+        <h2>Player who has won all awards</h2>
+        <form method="GET" action="DIVISION.php"> 
+            <input type="submit" name="averageSalary" value="go"></p>
+        </form>
+
 	</body>
 </html>
