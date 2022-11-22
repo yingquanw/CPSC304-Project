@@ -1,4 +1,4 @@
-  <html>
+<html>
     <head>
         <title>Fan Registration</title>
     </head>
