@@ -18,7 +18,7 @@
             $success = False;
         }
 
-        $r = OCIExecute($statement, OCI_DEFAULT);
+        $r = OCIExecute($statement, OCI_COMMIT_ON_SUCCESS);
         if (!$r) {
             echo "<br>Cannot execute the following command: " . $cmdstr . "<br>";
             $e = oci_error($statement); // For OCIExecute errors pass the statementhandle
@@ -64,8 +64,10 @@
 
     if (isset($_POST['delete'])) {
         if (connectToDB()) {
-            $value = intval($_POST['id']);
-            $temp = executePlainSQL("DELETE FROM Staff WHERE staffID=$value");
+            if (array_key_exists('id', $_POST)) {
+                $value = intval($_POST['id']);
+                $temp = executePlainSQL("DELETE FROM Staff WHERE staffID=$value");
+            }
             disconnectFromDB();
         }
     }
@@ -89,7 +91,7 @@
 
     <body>
         <div class="container">
-            <table class="table table-striped table-borderrer">
+            <table class="table">
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
@@ -107,8 +109,8 @@
                             echo 
                                 "<td>
                                     <form method='POST'>
-                                        <input type=hidden name=id value=".$row[0]." >
-                                        <input type=submit value=Delete name=delete >
+                                        <input type='hidden' name='id' value=".$row[0].">
+                                        <input type='submit' name='delete' value='Delete'>
                                     </form>
                                 </td>";
                             echo "</tr>";
