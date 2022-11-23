@@ -18,7 +18,7 @@
             $success = False;
         }
 
-        $r = OCIExecute($statement, OCI_DEFAULT);
+        $r = OCIExecute($statement, OCI_COMMIT_ON_SUCCESS);
         if (!$r) {
             echo "<br>Cannot execute the following command: " . $cmdstr . "<br>";
             $e = oci_error($statement); // For OCIExecute errors pass the statementhandle
@@ -61,30 +61,18 @@
         debugAlertMessage("Disconnect from Database");
         OCILogoff($db_conn);
     }
-
-    if (isset($_POST['delete'])) {
-        if (connectToDB()) {
-            if (array_key_exists('id', $_POST)) {
-                $value = intval($_POST['id']);
-                $temp = executePlainSQL("DELETE FROM Staff 
-                WHERE staffID = $value");
-            }
-            OCICommit($db_conn);
-            disconnectFromDB();
-        }
-    }
     
     if (connectToDB()) {
-        $result = executePlainSQL("SELECT staffID, staffName, teamName
-            FROM Staff s, Team_Sponsors_Stadium t 
-            WHERE s.teamID = t.teamID");
+        $result = executePlainSQL("SELECT fanID, fanName, email, teamName
+            FROM Fan f, Team_Sponsors_Stadium t 
+            WHERE f.teamID = t.teamID");
         disconnectFromDB();
     }
 ?>
 
 <html>
     <head>
-        <title>Staff Deletion</title>
+        <title>Fan Viewer</title>
     </head>
 
     <form method="GET" action="main.php"> 
@@ -96,8 +84,9 @@
             <table class="table">
                 <tr>
                     <th>Name</th>
-                    <th>Team</th>
-                    <th>Delete Button</th>
+                    <th>Email</th>
+                    <th>Favorite Team</th>
+                    <th>Update Button</th>
                 </tr>
 
                 <?php
@@ -106,12 +95,10 @@
                             echo "<tr>";
                             echo "<td>" . $row[1] . "</td>";
                             echo "<td>" . $row[2] . "</td>";
+                            echo "<td>" . $row[3] . "</td>";
                             echo 
                                 "<td>
-                                    <form method='POST'>
-                                        <input type='hidden' name='id' value=".$row[0].">
-                                        <input type='submit' name='delete' value='Delete'>
-                                    </form>
+                                    <a class='button' href='fanUpdate.php?fanID=" .$row[0]. "'> Update</a>
                                 </td>";
                             echo "</tr>";
                         }

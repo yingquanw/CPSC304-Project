@@ -115,7 +115,7 @@
 
             // Your username is ora_(CWL_ID) and the password is a(student number). For example,
 			// ora_platypus is the username and a12345678 is the password.
-            $db_conn = OCILogon("ora_yingquan", "a41274853", "dbhost.students.cs.ubc.ca:1522/stu");
+            $db_conn = OCILogon("ora_zqy2002", "a87141024", "dbhost.students.cs.ubc.ca:1522/stu");
 
             if ($db_conn) {
                 debugAlertMessage("Database is Connected");
@@ -149,14 +149,14 @@
         }
 
         // HANDLE ALL POST ROUTES
-    function handlePOSTRequest() {
-        if (connectToDB()) {
-            if (array_key_exists('awardSearchRequest', $_POST)) {
-                handleAwardSearchRequest();
-            } 
-            disconnectFromDB();
+        function handlePOSTRequest() {
+            if (connectToDB()) {
+                if (array_key_exists('awardSearchRequest', $_POST)) {
+                    handleAwardSearchRequest();
+                } 
+                disconnectFromDB();
+            }
         }
-    }
 
         if (isset($_POST['searchAward'])) {
             handlePOSTRequest();
