@@ -6,9 +6,16 @@
 
     <body>
 
-        <h2>Fan management</h2>
+        <h2>Fan Registration</h2>
         <form method="GET" action="fanRegister.php"> 
             <input type="submit" name="fan" value="Go"></p>
+        </form>
+        
+        <hr />
+
+        <h2>Fan Update</h2>
+        <form method="GET" action="fanView.php"> 
+            <input type="submit" name="fanView" value="go"></p>
         </form>
 
         <hr />
@@ -20,7 +27,7 @@
 
         <hr />
 
-        <h2>Award</h2>
+        <h2>Awards and Honers</h2>
         <form method="GET" action="awardedPlayers.php"> 
             <input type="submit" name="award" value="Go"></p>
         </form>
@@ -52,13 +59,5 @@
         <form method="GET" action="deleteStaff.php"> 
             <input type="submit" name="deleteStaff" value="go"></p>
         </form>
-
-        <hr />
-
-        <h2>Fan Update</h2>
-        <form method="GET" action="fanView.php"> 
-            <input type="submit" name="fanView" value="go"></p>
-        </form>
-
 	</body>
 </html>
