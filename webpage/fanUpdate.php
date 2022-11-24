@@ -70,7 +70,7 @@
     if (connectToDB()) {
         $result = executePlainSQL("SELECT fanID, fanName, email, f.teamID, teamName
             FROM Fan f, Team_Sponsors_Stadium t 
-            WHERE f.teamID = t.teamID");
+            WHERE f.teamID = t.teamID AND fanID = $fanID");
         disconnectFromDB();
     }
 
