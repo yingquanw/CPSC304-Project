@@ -312,6 +312,10 @@ INSERT INTO AwardsAndHonors VALUES(46, 'Most Improved', '2018-2019');
 INSERT INTO AwardsAndHonors VALUES(46, 'Sixth Man', '2018-2019');
 INSERT INTO AwardsAndHonors VALUES(46, 'Defensive Player of Year', '2018-2019');
 
+INSERT INTO Fan VALUES(1, 1, 'Jia Lu', 'jialu@gmail.com');
+INSERT INTO Fan VALUES(2, 2, 'Yingquan Wang', 'yingquanwang@gmail.com');
+INSERT INTO Fan VALUES(3, 3, 'Qiyu Zhou', 'qiyuzhou@gmail.com');
+
 INSERT INTO Boss VALUES(1, 1, 'Boston Basketball Partners', 74000000);
 INSERT INTO Boss VALUES(2, 2, 'Joseph Tsai', 37000000);
 INSERT INTO Boss VALUES(3, 3, 'Madison Square Garden Sports', 83000000);

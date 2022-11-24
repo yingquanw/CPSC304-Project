@@ -1,1 +1,1 @@
-This is the UBC Insight project made by Jia Lu, Yingquan Wang and Qiyu Zhou.
+This is the NBA Fan League project made by Jia Lu, Yingquan Wang and Qiyu Zhou.
