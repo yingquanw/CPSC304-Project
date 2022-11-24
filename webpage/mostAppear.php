@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Player who have won all AwardsAndHonors</title>
+        <title>Highest Appearance in Each Team</title>
     </head>
    <!-- add Html link -->
 
@@ -10,10 +10,10 @@
             <input type="submit" name="mainPage" value="Back to main page"></p>
     </form>
 
-        <h2>Player who have won all AwardsAndHonors</h2>
-        <form method="GET" action="DIVISION.php"> <!--refresh page when submitted-->
-            <input type="hidden" id="DVRequest" name="DVRequest">
-            <input type="submit" name="DV" value="get"></p>
+        <h2>Highest Appearance in Each Team</h2>
+        <form method="GET" action="mostAppear.php"> <!--refresh page when submitted-->
+            <input type="hidden" id="MARequest" name="MARequest">
+            <input type="submit" name="MA" value="get"></p>
         </form>
 
         <?php
@@ -56,15 +56,14 @@
 			return $statement;
 		}
 
-
         function printResult($result) { //prints results from a select statement
+            echo "Result excludes young teams with less than 2 players who have more than 200 appearance.";
             echo "<table>";
-            echo "<tr><th>playerName</th><th>";
+            echo "<tr><th>Team</th><th>Highest Appearance</th></tr>";
 
             
             while (($row = OCI_Fetch_Array($result, OCI_BOTH)) != false) {
-                echo "<tr><td>" . $row[0] . "</td><td>"; 
-                // echo "<br> The number of tuples in demoTable: " . $row[0] . "<br>";
+                echo "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td></tr>"; 
             }
 
             echo "</table>";
@@ -95,43 +94,31 @@
             OCILogoff($db_conn);
         }
 
-
-
-
-        function handleDVRequest() {
+        function handleMAPRequest() {
             global $db_conn;
 
-            $result = executePlainSQL("SELECT playerName
-            FROM Player p
-            WHERE NOT EXISTS
-            (( SELECT a.awardName
-               FROM AwardsAndHonors a
-               GROUP BY a.awardName)
-            MINUS
-            ( SELECT b.awardName
-              FROM AwardsAndHonors b
-              WHERE b.playerID = p.playerID))");
+            $result = executePlainSQL("SELECT teamName, max(appearance) 
+            FROM Player p, Team_Sponsors_Stadium t 
+            WHERE p.teamID = t.teamID AND appearance > 200 
+            GROUP BY teamName 
+            HAVING COUNT(*) >= 2");
 
-
-            //echo "$result";
             printResult($result);
         }
 
-    
-
         // HANDLE ALL GET ROUTES
-	// A better coding practice is to have one method that reroutes your requests accordingly. It will make it easier to add/remove functionality.
+	    // A better coding practice is to have one method that reroutes your requests accordingly. It will make it easier to add/remove functionality.
         function handleGETRequest() {
             if (connectToDB()) {
-                if (array_key_exists('DV', $_GET)) {
-                    handleDVRequest();
+                if (array_key_exists('MA', $_GET)) {
+                    handleMAPRequest();
                 }
 
                 disconnectFromDB();
             }
         }
 
-	   if (isset($_GET['DVRequest'])) {
+	   if (isset($_GET['MARequest'])) {
             handleGETRequest();
         }
 		?>

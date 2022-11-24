@@ -13,6 +13,7 @@
             <input type="hidden" id="awardSearchRequest" name="awardSearchRequest">
             Season: <select name="season">
                 <option value="">--Please choose a season--</option>
+                <option value="'2019-2020'">2018-2019</option>
                 <option value="'2019-2020'">2019-2020</option>
                 <option value="'2020-2021'">2020-2021</option>
                 </select>

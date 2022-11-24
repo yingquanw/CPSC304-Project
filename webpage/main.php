@@ -8,7 +8,7 @@
 
         <h2>Fan Registration</h2>
         <form method="GET" action="fanRegister.php"> 
-            <input type="submit" name="fan" value="Go"></p>
+            <input type="submit" name="fanRegister" value="Go"></p>
         </form>
         
         <hr />
@@ -43,14 +43,21 @@
 
         <h2>Highest Average Salary</h2>
         <form method="GET" action="NEST_AG_GROUP.php"> 
-            <input type="submit" name="averageSalary" value="go"></p>
+            <input type="submit" name="NEST_AG_GROUP" value="go"></p>
         </form>
 
         <hr />
 
         <h2>Player who has won all awards</h2>
         <form method="GET" action="DIVISION.php"> 
-            <input type="submit" name="averageSalary" value="go"></p>
+            <input type="submit" name="DIVISION" value="go"></p>
+        </form>
+
+        <hr />
+
+        <h2>Highest Appearance in Each Team</h2>
+        <form method="GET" action="mostAppear.php"> 
+            <input type="submit" name="mostAppearance" value="go"></p>
         </form>
 
         <hr />

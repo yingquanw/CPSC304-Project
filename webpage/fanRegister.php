@@ -86,8 +86,6 @@
                 $e = oci_error($statement); // For OCIExecute errors pass the statementhandle
                 echo htmlentities($e['message']);
                 $success = False;
-            } else {
-                echo "<br> Update successed!";
             }
 
 			return $statement;
@@ -172,9 +170,11 @@
         function handleInsertRequest() {
             global $db_conn;
     
+            $numRows = OCI_Fetch_All(executePlainSQL("SELECT fanID FROM Fan"), $res) + 1;
+
             //Getting the values from user and insert data into the table
             $tuple = array (
-                ":bind1" => rand(100, 999),
+                ":bind1" => $numRows,
                 ":bind2" => $_POST['teamID'],
                 ":bind3" => $_POST['name'],
                 ":bind4" => $_POST['email']
@@ -185,7 +185,7 @@
                 $tuple
             );
 
-            executeBoundSQL("insert into Fan values (:bind1, :bind2, :bind3, :bind4)", $alltuples);
+            executeBoundSQL("INSERT INTO Fan VALUES (:bind1, :bind2, :bind3, :bind4)", $alltuples);
             OCICommit($db_conn);
         }
 
