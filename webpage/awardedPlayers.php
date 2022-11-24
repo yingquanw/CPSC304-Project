@@ -13,11 +13,11 @@
             <input type="hidden" id="awardSearchRequest" name="awardSearchRequest">
             Season: <select name="season">
                 <option value="">--Please choose a season--</option>
-                <option value="'2019-2020'">2018-2019</option>
+                <option value="'2018-2019'">2018-2019</option>
                 <option value="'2019-2020'">2019-2020</option>
                 <option value="'2020-2021'">2020-2021</option>
                 </select>
-            <input type="submit" name="searchAward"></p>
+            <input type="submit" name="searchAward" value="search"></p>
         </form>
 
         <?php
@@ -97,7 +97,7 @@
 
         function printResult($result) { //prints results from a select statement
     
-            echo "<br>Retrieved data from table Player join table AwardsAndHonors:<br>";
+            // echo "<br>Retrieved data from table Player join table AwardsAndHonors:<br>";
             echo "<h4>Season:" .$_POST['season']. " <h4>";
             echo "<table>";
             echo "<tr><th>Player</th><th>Jersey Number </th><th>Team</th><th>Award</th></tr>";

@@ -44,7 +44,7 @@
                 <option value="29">New Orleans Pelicans</option>
                 <option value="30">San Antonio Spurs</option>
                 </select>
-            <input type="submit" name="searchPlayer"></p>
+            <input type="submit" name="searchPlayer" value="search"></p>
         </form>
 
         <?php
@@ -132,7 +132,7 @@
             // }
 
             // echo "</table>";
-            echo "<br>Retrieved data from table Player:<br>";
+            // echo "<br>Retrieved data from table Player:<br>";
             echo "<table>";
             echo "<tr><th>Name</th><th>jerseyNum</th></tr>";
 

@@ -63,7 +63,7 @@
 
             
             while (($row = OCI_Fetch_Array($result, OCI_BOTH)) != false) {
-                echo "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td></tr>"; 
+                echo "<tr><td>" . $row[0] . "</td><td>" . number_format((float)$row[1], 2, '.', '') . "</td></tr>"; 
                 // echo "<br> The number of tuples in demoTable: " . $row[0] . "<br>";
             }
 

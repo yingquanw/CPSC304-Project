@@ -59,7 +59,7 @@
 
         function printResult($result) { //prints results from a select statement
             echo "<table>";
-            echo "<tr><th>playerName</th><th>";
+            echo "<tr><th>Player Name</th><th>";
 
             
             while (($row = OCI_Fetch_Array($result, OCI_BOTH)) != false) {
