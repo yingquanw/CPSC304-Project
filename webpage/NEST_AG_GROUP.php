@@ -105,10 +105,10 @@
             FROM Player p, Team_Sponsors_Stadium t
             WHERE p.teamID = t.teamID
             GROUP BY teamName
-            having avg(salary) >= all ( select avg(p.salary)
-                                        from Player p, Team_Sponsors_Stadium t
+            HAVING avg(salary) >= all ( SELECT avg(p.salary)
+                                        FROM Player p, Team_Sponsors_Stadium t
                                         WHERE p.teamID = t.teamID
-                                        group by teamName
+                                        GROUP BY teamName
                                                             )");
 
             printResult($result);
