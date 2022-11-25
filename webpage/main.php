@@ -4,8 +4,9 @@
     </head>
    <!-- add Html link -->
 
-    <body>
-
+        <div style="text-align:center">
+            <h1 class="center" style="color: #2B65EC">NBA Fan Club</h1>
+        </div>
         <h2>Fan Registration</h2>
         <form method="GET" action="fanRegister.php"> 
             <input type="submit" name="fanRegister" value="Go"></p>
