@@ -16,7 +16,7 @@
 
         <h2>Fan Update</h2>
         <form method="GET" action="fanView.php"> 
-            <input type="submit" name="fanView" value="go"></p>
+            <input type="submit" name="fanView" value="Go"></p>
         </form>
 
         <hr />
@@ -28,44 +28,44 @@
 
         <hr />
 
-        <h2>Awards and Honers</h2>
+        <h2>Awards and Honors</h2>
         <form method="GET" action="awardedPlayers.php"> 
             <input type="submit" name="award" value="Go"></p>
         </form>
 
         <hr />
 
-        <h2>Total expense on players</h2>
+        <h2>Total expenses on players</h2>
         <form method="GET" action="expenseOnPlayer.php"> 
-            <input type="submit" name="expense" value="go"></p>
+            <input type="submit" name="expense" value="Go"></p>
         </form>
 
         <hr />
 
         <h2>Highest Average Salary</h2>
         <form method="GET" action="NEST_AG_GROUP.php"> 
-            <input type="submit" name="NEST_AG_GROUP" value="go"></p>
+            <input type="submit" name="NEST_AG_GROUP" value="Go"></p>
         </form>
 
         <hr />
 
         <h2>Player who has won all awards</h2>
         <form method="GET" action="DIVISION.php"> 
-            <input type="submit" name="DIVISION" value="go"></p>
+            <input type="submit" name="DIVISION" value="Go"></p>
         </form>
 
         <hr />
 
         <h2>Highest Appearance in Each Team</h2>
         <form method="GET" action="mostAppear.php"> 
-            <input type="submit" name="mostAppearance" value="go"></p>
+            <input type="submit" name="mostAppearance" value="Go"></p>
         </form>
 
         <hr />
 
         <h2>Staff Deletion</h2>
         <form method="GET" action="deleteStaff.php"> 
-            <input type="submit" name="deleteStaff" value="go"></p>
+            <input type="submit" name="deleteStaff" value="Go"></p>
         </form>
 	</body>
 </html>

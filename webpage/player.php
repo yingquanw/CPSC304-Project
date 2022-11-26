@@ -134,7 +134,7 @@
             // echo "</table>";
             // echo "<br>Retrieved data from table Player:<br>";
             echo "<table>";
-            echo "<tr><th>Name</th><th>jerseyNum</th></tr>";
+            echo "<tr><th>Name</th><th>Jersey Number</th></tr>";
 
             
             while (($row = OCI_Fetch_Array($result, OCI_BOTH)) != false) {
